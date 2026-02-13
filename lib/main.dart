@@ -1,0 +1,33 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'core/theme/app_theme.dart';
+import 'core/services/database_service.dart';
+import 'core/router/app_router.dart';
+
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  try {
+    await DatabaseService.init();
+  } catch (e) {
+    print('Database init failed: $e');
+  }
+
+  runApp(const ProviderScope(child: CharityApp()));
+}
+
+class CharityApp extends ConsumerWidget {
+  const CharityApp({super.key});
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final router = ref.watch(goRouterProvider);
+
+    return MaterialApp.router(
+      title: 'Charity App',
+      theme: AppTheme.lightTheme,
+      routerConfig: router,
+      debugShowCheckedModeBanner: false,
+    );
+  }
+}
