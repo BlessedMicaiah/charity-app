@@ -10,7 +10,7 @@ Future<void> main() async {
   try {
     await DatabaseService.init();
   } catch (e) {
-    print('Database init failed: $e');
+    debugPrint('Database init failed: $e');
   }
 
   runApp(const ProviderScope(child: CharityApp()));

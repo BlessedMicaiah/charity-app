@@ -1,11 +1,12 @@
 import 'package:isar/isar.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
+import 'package:flutter/foundation.dart';
 import 'package:path_provider/path_provider.dart';
 import '../../features/auth/data/user_preferences.dart';
 import '../../features/bible/data/scripture.dart';
 
 class DatabaseService {
-  static late Isar isar;
+  static Isar? isar;
   static SupabaseClient? supabase;
 
   static Future<void> init() async {
@@ -24,15 +25,19 @@ class DatabaseService {
       );
       supabase = Supabase.instance.client;
     } catch (e) {
-      print('Supabase init failed: $e');
+      if (kDebugMode) {
+        print('Supabase init failed: $e');
+      }
       // Continue without Supabase for UI testing
     }
 
     // Isar
-    final dir = await getApplicationDocumentsDirectory();
-    isar = await Isar.open(
-      [UserPreferencesSchema, ScriptureSchema],
-      directory: dir.path,
-    );
+    if (!kIsWeb) {
+      final dir = await getApplicationDocumentsDirectory();
+      isar = await Isar.open(
+        [UserPreferencesSchema, ScriptureSchema],
+        directory: dir.path,
+      );
+    }
   }
 }
