@@ -1,12 +1,12 @@
-import 'package:isar/isar.dart';
+import 'package:objectbox/objectbox.dart';
 
-part 'user_preferences.g.dart';
-
-@collection
+@Entity()
 class UserPreferences {
-  Id id = Isar.autoIncrement;
+  @Id()
+  int id = 0;
 
-  @Index(unique: true, replace: true)
+  @Index()
+  @Unique()
   String? userId; // Supabase User ID
 
   bool isStealthMode = false;

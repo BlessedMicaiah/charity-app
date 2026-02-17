@@ -1,12 +1,11 @@
-import 'package:isar/isar.dart';
+import 'package:objectbox/objectbox.dart';
 
-part 'scripture.g.dart';
-
-@collection
+@Entity()
 class Scripture {
-  Id id = Isar.autoIncrement;
+  @Id()
+  int id = 0;
 
-  @Index(type: IndexType.value)
+  @Index()
   late String book;
 
   late int chapter;
@@ -16,5 +15,6 @@ class Scripture {
   late String text;
 
   @Index()
+  @Property(type: PropertyType.date)
   DateTime? lastRead;
 }

@@ -1,27 +1,28 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:isar/isar.dart';
 import '../data/user_preferences.dart';
 import '../../../core/services/database_service.dart';
 
 final userPreferencesProvider = FutureProvider<UserPreferences?>((ref) async {
   if (kIsWeb) {
-    // Isar is disabled on web. Return a default/in-memory instance.
+    // ObjectBox is disabled on web. Return a default/in-memory instance.
     return UserPreferences()
       ..isStealthMode = false
       ..isLiteMode = false;
   }
 
-  final isar = DatabaseService.isar;
-  if (isar == null) return null;
+  final store = DatabaseService.store;
+  if (store == null) return null;
+
+  final box = store.box<UserPreferences>();
 
   // Get the first user pref or create default
-  final prefs = await isar.userPreferences.where().findFirst();
+  // ObjectBox IDs start at 1 usually, but if we query all we can find the first.
+  final prefs = box.getAll().firstOrNull;
+
   if (prefs == null) {
     final newPrefs = UserPreferences();
-    await isar.writeTxn(() async {
-      await isar.userPreferences.put(newPrefs);
-    });
+    box.put(newPrefs);
     return newPrefs;
   }
   return prefs;

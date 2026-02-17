@@ -1,12 +1,11 @@
-import 'package:isar/isar.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:flutter/foundation.dart';
 import 'package:path_provider/path_provider.dart';
-import '../../features/auth/data/user_preferences.dart';
-import '../../features/bible/data/scripture.dart';
+import 'package:path/path.dart' as p;
+import '../../objectbox.g.dart'; // This file will be generated
 
 class DatabaseService {
-  static Isar? isar;
+  static Store? store;
   static SupabaseClient? supabase;
 
   static Future<void> init() async {
@@ -31,13 +30,11 @@ class DatabaseService {
       // Continue without Supabase for UI testing
     }
 
-    // Isar
+    // ObjectBox
     if (!kIsWeb) {
-      final dir = await getApplicationDocumentsDirectory();
-      isar = await Isar.open(
-        [UserPreferencesSchema, ScriptureSchema],
-        directory: dir.path,
-      );
+      final docsDir = await getApplicationDocumentsDirectory();
+      // Future-proofing: ObjectBox Store.open needs a directory path.
+      store = await openStore(directory: p.join(docsDir.path, "objectbox"));
     }
   }
 }

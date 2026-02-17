@@ -1,0 +1,14 @@
+Analyzing app...
+
+   info • The import of 'package:objectbox/objectbox.dart' is unnecessary because all of the used elements are also provided by the import of '../../objectbox.g.dart' • lib/core/services/database_service.dart:1:8 • unnecessary_import
+   info • The imported package 'path' isn't a dependency of the importing package • lib/core/services/database_service.dart:5:8 • depend_on_referenced_packages
+   info • 'background' is deprecated and shouldn't be used. Use surface instead. This feature was deprecated after v3.18.0-0.1.pre • lib/core/theme/app_theme.dart:14:9 • deprecated_member_use
+   info • 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss • lib/core/widgets/neumorphic_container.dart:59:32 • deprecated_member_use
+   info • 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss • lib/core/widgets/neumorphic_container.dart:66:50 • deprecated_member_use
+warning • Unused import: 'package:objectbox/objectbox.dart' • lib/features/auth/presentation/auth_providers.dart:3:8 • unused_import
+   info • 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss • lib/features/home/presentation/home_screen.dart:112:88 • deprecated_member_use
+   info • 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss • lib/features/home/presentation/home_screen.dart:126:41 • deprecated_member_use
+   info • 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss • lib/features/missions/presentation/missions_screen.dart:56:20 • deprecated_member_use
+   info • 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss • lib/features/missions/presentation/missions_screen.dart:71:36 • deprecated_member_use
+
+10 issues found. (ran in 5.7s)

@@ -1,10 +1,10 @@
 import 'package:flutter/foundation.dart';
-import 'package:isar/isar.dart';
+import 'package:objectbox/objectbox.dart';
 import '../../../core/services/database_service.dart';
 import 'scripture.dart';
 
 class ScriptureRepository {
-  Isar? get _isar => DatabaseService.isar;
+  Store? get _store => DatabaseService.store;
 
   // Mock data from "Backend"
   final _mockData = [
@@ -30,7 +30,7 @@ class ScriptureRepository {
       ..text = 'I can do all things through him who strengthens me.',
   ];
 
-  // Simulate fetching from Supabase and saving to Isar
+  // Simulate fetching from Supabase and saving to ObjectBox
   Future<void> syncScripture() async {
     if (kIsWeb) {
       // On Web, we use "Supabase" directly (mocked here), so "sync" is a no-op
@@ -39,13 +39,17 @@ class ScriptureRepository {
       return;
     }
 
-    // Mobile/Desktop Logic: Save to Isar
-    final isar = _isar;
-    if (isar != null) {
-      await isar.writeTxn(() async {
-        await isar.scriptures.clear(); // Clear old for demo
-        await isar.scriptures.putAll(_mockData);
-      });
+    // Mobile/Desktop Logic: Save to ObjectBox
+    final store = _store;
+    if (store != null) {
+      final box = store.box<Scripture>();
+
+      // ObjectBox writes are synchronous by default unless runInTransaction is used,
+      // but putting many items is fast.
+      // To mimic the previous logic: clear and put all.
+
+      box.removeAll();
+      box.putMany(_mockData);
     }
   }
 
@@ -56,9 +60,9 @@ class ScriptureRepository {
     }
 
     // Mobile/Desktop: Return from local DB
-    final isar = _isar;
-    if (isar == null) return [];
+    final store = _store;
+    if (store == null) return [];
 
-    return isar.scriptures.where().findAll();
+    return store.box<Scripture>().getAll();
   }
 }
