@@ -1,0 +1,97 @@
+{
+  "_note1": "KEEP THIS FILE! Check it into a version control system (VCS) like git.",
+  "_note2": "ObjectBox manages crucial IDs for your object model. See docs for details.",
+  "_note3": "If you have VCS merge conflicts, you must resolve them according to ObjectBox docs.",
+  "entities": [
+    {
+      "id": "1:4381539499160171488",
+      "lastPropertyId": "6:3413205150055721056",
+      "name": "Scripture",
+      "properties": [
+        {
+          "id": "1:7956338616499544948",
+          "name": "id",
+          "type": 6,
+          "flags": 1
+        },
+        {
+          "id": "2:1533607813892028835",
+          "name": "book",
+          "type": 9,
+          "flags": 2048,
+          "indexId": "1:8510447897508053661"
+        },
+        {
+          "id": "3:2294414593759112514",
+          "name": "chapter",
+          "type": 6
+        },
+        {
+          "id": "4:7598296444351070383",
+          "name": "verse",
+          "type": 6
+        },
+        {
+          "id": "5:3543460097660463035",
+          "name": "text",
+          "type": 9
+        },
+        {
+          "id": "6:3413205150055721056",
+          "name": "lastRead",
+          "type": 10,
+          "flags": 8,
+          "indexId": "2:8525708298806220162"
+        }
+      ],
+      "relations": []
+    },
+    {
+      "id": "2:4852855440985926634",
+      "lastPropertyId": "5:7627040479500231753",
+      "name": "UserPreferences",
+      "properties": [
+        {
+          "id": "1:4793686187910110002",
+          "name": "id",
+          "type": 6,
+          "flags": 1
+        },
+        {
+          "id": "2:6923226556300231447",
+          "name": "userId",
+          "type": 9,
+          "flags": 2080,
+          "indexId": "3:841504317878740731"
+        },
+        {
+          "id": "3:9020538119636749682",
+          "name": "isStealthMode",
+          "type": 1
+        },
+        {
+          "id": "4:1496697426038210894",
+          "name": "isLiteMode",
+          "type": 1
+        },
+        {
+          "id": "5:7627040479500231753",
+          "name": "pinCode",
+          "type": 9
+        }
+      ],
+      "relations": []
+    }
+  ],
+  "lastEntityId": "2:4852855440985926634",
+  "lastIndexId": "3:841504317878740731",
+  "lastRelationId": "0:0",
+  "lastSequenceId": "0:0",
+  "modelVersion": 5,
+  "modelVersionParserMinimum": 5,
+  "retiredEntityUids": [],
+  "retiredIndexUids": [],
+  "retiredPropertyUids": [],
+  "retiredRelationUids": [],
+  "version": 1
+}
